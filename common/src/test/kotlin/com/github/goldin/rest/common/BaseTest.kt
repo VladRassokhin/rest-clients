@@ -32,11 +32,9 @@ class InputStreamSupplier( val stream: InputStream ): InputSupplier<InputStream>
  */
 open class BaseTest
 {
-    val restClientsUrl           = "http://rest-clients.myjetbrains.com/youtrack/"
-    val evgenygUrl               = "http://evgenyg.myjetbrains.com/youtrack"
-    val evgenyGoldinUrl          = "http://evgeny-goldin.org/youtrack"
-    val jetbrainsUrl             = "http://youtrack.jetbrains.com/"
-    fun allUrls() : List<String> = arrayList<String>( restClientsUrl, evgenygUrl, evgenyGoldinUrl, jetbrainsUrl )
+    public val restClientsUrl  : String = "http://rest-clients.myjetbrains.com/youtrack/"
+    public val evgenyGoldinUrl : String = "http://evgeny-goldin.org/youtrack"
+    public val jetbrainsUrl    : String = "http://youtrack.jetbrains.com/"
 
 
     fun dateFormat( pattern: String, timezone: String = "GMT" ): DateFormat

@@ -1,6 +1,5 @@
 package com.github.goldin.rest.youtrack;
 
-import static junit.framework.TestCase.*;
 import com.github.goldin.rest.common.BaseTest;
 import com.github.goldin.rest.common.HTTP;
 import org.junit.Before;
@@ -14,13 +13,15 @@ import java.util.*;
 import java.util.zip.Adler32;
 import java.util.zip.CRC32;
 
+import static junit.framework.TestCase.*;
+
 
 /**
  * {@link YouTrack} test.
  */
 public class YouTrackTest extends BaseTest
 {
-    private final YouTrack yt = new YouTrack( restClientsUrl );
+    private final YouTrack yt = new YouTrack( getRestClientsUrl());
 
     private DateFormat dateFormat;
     private Random     random;
@@ -42,7 +43,7 @@ public class YouTrackTest extends BaseTest
     @Ignore
     public void testWadl() throws IOException
     {
-        final String wadl = new HTTP().responseAsString( new UrlBuilder( jetbrainsUrl ).wadl());
+        final String wadl = new HTTP().responseAsString( new UrlBuilder( getJetbrainsUrl()).wadl());
         assertEquals( 1880008272L, checksum( wadl, "UTF-8", new Adler32()));
         assertEquals( 1654558566L, checksum( wadl, "UTF-8", new CRC32()));
         assertEquals( toString( "/application.wadl" ).trim(), wadl.trim());
@@ -168,12 +169,12 @@ public class YouTrackTest extends BaseTest
     @Test
     public void testRetrieveIssues()
     {
-        testRetrieveIssues( restClientsUrl,  "pl",   random.nextInt( 350   ), 10 );
-        testRetrieveIssues( evgenyGoldinUrl, "pl",   random.nextInt( 600   ), 10 );
-        testRetrieveIssues( evgenyGoldinUrl, "gc",   random.nextInt( 100   ), 10 );
-        testRetrieveIssues( jetbrainsUrl,    "JT",   random.nextInt( 15800 ), 10 );
-        testRetrieveIssues( jetbrainsUrl,    "IDEA", random.nextInt( 89000 ), 10 );
-        testRetrieveIssues( jetbrainsUrl,    "TW",   random.nextInt( 22700 ), 10 );
+        testRetrieveIssues( getRestClientsUrl(),  "pl",   random.nextInt( 350   ), 10 );
+        testRetrieveIssues( getEvgenyGoldinUrl(), "pl",   random.nextInt( 600   ), 10 );
+        testRetrieveIssues( getEvgenyGoldinUrl(), "gc",   random.nextInt( 100   ), 10 );
+        testRetrieveIssues( getJetbrainsUrl(),    "JT",   random.nextInt( 15800 ), 10 );
+        testRetrieveIssues( getJetbrainsUrl(),    "IDEA", random.nextInt( 89000 ), 10 );
+        testRetrieveIssues( getJetbrainsUrl(),    "TW",   random.nextInt( 22700 ), 10 );
     }
 
 
