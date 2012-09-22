@@ -61,7 +61,6 @@ class HTTP
 
         if ( isPost )
         {
-
             request.setContent( assertNotNull( content, "Content needs to be specified for POST request" ))
         }
 
@@ -116,7 +115,7 @@ class HTTP
      */
     fun responseAsJson<T> ( url : String, rtype : Class<T> ) : T = request( isGet   = true,
                                                                             url     = url,
-                                                                            headers = hashMap(Pair("Accept" , Json.CONTENT_TYPE)),
+                                                                            headers = hashMap( Pair( "Accept", Json.CONTENT_TYPE )),
                                                                             parser  = JsonObjectParser( JacksonFactory())).
                                                                    parseAs( rtype )!!
 }

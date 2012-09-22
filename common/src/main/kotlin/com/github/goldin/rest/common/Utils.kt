@@ -2,8 +2,7 @@ package com.github.goldin.rest.common
 
 import java.lang.reflect.Field
 import java.util.Date
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 
 /**
@@ -12,9 +11,9 @@ import kotlin.test.assertTrue
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-val OBJECT_CLASS  : Class<jet.Any>  = javaClass<jet.Any>()
+val OBJECT_CLASS  : Class<Object>  = javaClass<Object>()
 val STRING_CLASS  : Class<String>  = javaClass<String>()
-val INTEGER_CLASS : Class<jet.Int> = javaClass<jet.Int>()
+val INTEGER_CLASS : Class<Integer> = javaClass<Integer>()
 val DATE_CLASS    : Class<Date>    = javaClass<Date>()
 val BOOLEAN_CLASS : Class<Boolean> = javaClass<Boolean>()
 
@@ -30,9 +29,11 @@ public fun updateObject( o : Any, map: Map<String, Any> ): Map<String, Any>
    /**
     * Mapping of object fields: field name => field instance
     */
-    val objectFields = o.javaClass.getFields()!!.convertToMap<Field, String, Field> {
+    val objectFields = o.javaClass.getDeclaredFields()!!.convertToMap<Field, String, Field> {
         field -> Pair( field.getName()!! , field )
     }
+
+    assertFalse( objectFields.isEmpty(), "Object [${ o.javaClass.getName() }] fields map is empty" )
 
     for ( e : Map.Entry<String, Any>? in map )
     {
@@ -50,6 +51,7 @@ public fun updateObject( o : Any, map: Map<String, Any> ): Map<String, Any>
             }
             else
             {
+                field.setAccessible( true )
                 field.set( o, fieldValueConverted )
             }
         }

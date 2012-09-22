@@ -14,30 +14,29 @@ import kotlin.test.assertTrue
  */
 class Issue
 {
-    [Key] public  var id               : String? = null
-    [Key] public  var jiraId           : Any?    = null
+    [Key] public  var id         : String?                          = null
+    [Key] public  var jiraId     : Any?                             = null
+    [Key] private var tag        : Array<ArrayMap<String, String>>? = null
+    [Key] private var field      : Array<ArrayMap<String, Any>?>?   = null
+    [Key] private var comment    : Array<Comment>?                  = null
 
-    [Key] private var tag              : Array<ArrayMap<String, String>>? = null
-    [Key] private var field            : Array<ArrayMap<String, Any>?>?   = null
-    [Key] private var comment          : Array<Comment>?                  = null
-
-          public  var tags             : List<String>?     = null
-          public  var projectShortName : String?           = null
-          public  var numberInProject  : Int?              = null
-          public  var summary          : String?           = null
-          public  var description      : String?           = null
-          public  var created          : Date?             = null
-          public  var updated          : Date?             = null
-          public  var resolved         : Date?             = null
-          public  var updaterName      : String?           = null
-          public  var updaterFullName  : String?           = null
-          public  var reporterName     : String?           = null
-          public  var reporterFullName : String?           = null
-          public  var commentsCount    : Int?              = null
-          public  var comments         : List<Comment>?    = null
-          public  var votes            : Int?              = null
-          public  var customFields     : Map<String, Any>? = null
-          public  var permittedGroup   : String?           = null
+    public  var projectShortName : String?           = null
+    public  var numberInProject  : Int?              = null
+    public  var summary          : String?           = null
+    public  var description      : String?           = null
+    public  var created          : Date?             = null
+    public  var updated          : Date?             = null
+    public  var resolved         : Date?             = null
+    public  var updaterName      : String?           = null
+    public  var updaterFullName  : String?           = null
+    public  var reporterName     : String?           = null
+    public  var reporterFullName : String?           = null
+    public  var commentsCount    : Int?              = null
+    public  var votes            : Int?              = null
+    public  var permittedGroup   : String?           = null
+    public  var tags             : List<String>?     = null
+    public  var customFields     : Map<String, Any>? = null
+    public  var comments         : List<Comment>?    = null
 
 
     /**
