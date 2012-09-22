@@ -1,12 +1,8 @@
 package com.github.goldin.rest.youtrack
 
-import com.github.goldin.rest.common.HTTP
-import jet.List
-import kotlin.test.assertTrue
+import com.github.goldin.rest.common.*
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import com.github.goldin.rest.common.*
-import jet.Map
 
 
 /**

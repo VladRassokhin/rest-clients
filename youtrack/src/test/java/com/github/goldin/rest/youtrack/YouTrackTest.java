@@ -1,5 +1,6 @@
 package com.github.goldin.rest.youtrack;
 
+import static junit.framework.TestCase.*;
 import com.github.goldin.rest.common.BaseTest;
 import com.github.goldin.rest.common.HTTP;
 import org.junit.Before;
@@ -12,8 +13,6 @@ import java.text.ParseException;
 import java.util.*;
 import java.util.zip.Adler32;
 import java.util.zip.CRC32;
-
-import static junit.framework.TestCase.*;
 
 
 /**

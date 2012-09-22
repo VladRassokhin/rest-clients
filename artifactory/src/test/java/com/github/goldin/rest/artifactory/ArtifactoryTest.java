@@ -1,8 +1,7 @@
 package com.github.goldin.rest.artifactory;
 
-import org.junit.Test;
-
 import static junit.framework.TestCase.assertTrue;
+import org.junit.Test;
 
 
 public class ArtifactoryTest

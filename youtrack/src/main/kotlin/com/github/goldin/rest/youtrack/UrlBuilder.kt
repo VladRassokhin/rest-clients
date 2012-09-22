@@ -1,10 +1,7 @@
 package com.github.goldin.rest.youtrack
 
-import kotlin.test.assertFalse
-import jet.Map
 import java.net.URLEncoder
-import jet.Collection
-import jet.List
+import kotlin.test.assertFalse
 
 
 /**

@@ -1,14 +1,10 @@
 package com.github.goldin.rest.youtrack
 
+import com.github.goldin.rest.common.*
 import com.google.api.client.util.ArrayMap
 import com.google.api.client.util.Key
 import java.util.Date
-import jet.List
-import jet.Map
-import kotlin.test.assertNotNull
-import com.github.goldin.rest.common.*
 import kotlin.test.assertTrue
-import kotlin.test.assertEquals
 
 
 /**

@@ -1,12 +1,11 @@
 package com.github.goldin.rest.youtrack
 
-import com.google.api.client.util.Key
-import java.util.Date
-import kotlin.test.assertEquals
 import com.github.goldin.rest.common.verifyNotNull
+import com.google.api.client.util.Key
 import java.math.BigDecimal
-import kotlin.test.assertTrue
+import java.util.Date
 import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 
 /**

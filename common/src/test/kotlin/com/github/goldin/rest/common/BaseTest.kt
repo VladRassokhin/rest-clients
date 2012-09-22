@@ -1,24 +1,17 @@
 package com.github.goldin.rest.common
 
+import com.google.common.io.ByteStreams.*
+import com.google.common.io.CharStreams
+import com.google.common.io.InputSupplier
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.security.SecureRandom
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.util.TimeZone
-import java.security.SecureRandom
-import java.nio.charset.Charset
 import java.util.Random
-import java.io.InputStream
-import com.google.common.io.InputSupplier
-import java.awt.event.MouseEvent
-import java.awt.event.MouseAdapter
-import com.google.common.io.ByteStreams
+import java.util.TimeZone
 import java.util.zip.Adler32
 import java.util.zip.Checksum
-import com.google.common.primitives.Bytes
-import com.google.common.io.ByteStreams.*
-import jet.Map
-import jet.List
-import com.google.common.io.CharStreams
-import java.io.InputStreamReader
 
 
 class InputStreamSupplier( val stream: InputStream ): InputSupplier<InputStream>
