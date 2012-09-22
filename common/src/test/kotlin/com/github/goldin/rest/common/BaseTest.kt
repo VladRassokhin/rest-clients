@@ -15,8 +15,8 @@ import java.util.zip.Adler32
 import java.util.zip.Checksum
 import com.google.common.primitives.Bytes
 import com.google.common.io.ByteStreams.*
-import java.util.Map
-import java.util.List
+import jet.Map
+import jet.List
 import com.google.common.io.CharStreams
 import java.io.InputStreamReader
 

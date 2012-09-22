@@ -8,9 +8,9 @@ import com.google.api.client.http.HttpResponse
 import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.GenericJson
 import com.google.api.client.json.JsonObjectParser
-import com.google.api.client.json.jackson.JacksonFactory
+import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.client.util.ObjectParser
-import java.util.Map
+import jet.Map
 import kotlin.test.assertTrue
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -118,7 +118,7 @@ class HTTP
      */
     fun responseAsJson<T> ( url : String, rtype : Class<T> ) : T = request( isGet   = true,
                                                                             url     = url,
-                                                                            headers = hashMap( #( "Accept", Json.CONTENT_TYPE )),
+                                                                            headers = hashMap(Pair("Accept" , Json.CONTENT_TYPE)),
                                                                             parser  = JsonObjectParser( JacksonFactory())).
-                                                                   parseAs( rtype )!! as T
+                                                                   parseAs( rtype )!!
 }

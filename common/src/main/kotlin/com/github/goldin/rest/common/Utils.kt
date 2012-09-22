@@ -2,15 +2,15 @@ package com.github.goldin.rest.common
 
 import java.lang.reflect.Field
 import java.util.Date
-import java.util.List
-import java.util.Map
+import jet.List
+import jet.Map
 import kotlin.test.assertNotNull
-import java.util.Collection
+import jet.Collection
 import kotlin.nullable.toList
 import kotlin.test.assertTrue
 import java.math.BigDecimal
 import com.google.common.collect.Sets
-import java.util.Set
+import jet.Set
 import com.google.api.client.json.JsonToken
 
 
@@ -20,15 +20,11 @@ import com.google.api.client.json.JsonToken
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-val OBJECT_CLASS  : Class<Object>  = javaClass<Object>()
+val OBJECT_CLASS  : Class<jet.Any>  = javaClass<jet.Any>()
 val STRING_CLASS  : Class<String>  = javaClass<String>()
-val INTEGER_CLASS : Class<Integer> = javaClass<Integer>()
+val INTEGER_CLASS : Class<jet.Int> = javaClass<jet.Int>()
 val DATE_CLASS    : Class<Date>    = javaClass<Date>()
-
-// val BOOLEAN_CLASS : Class<Boolean> = javaClass<Boolean>()
-// throws java.lang.NoClassDefFoundError: Z
-// http://youtrack.jetbrains.com/issue/KT-2318
-
+val BOOLEAN_CLASS : Class<Boolean> = javaClass<Boolean>()
 
 
 /**
@@ -37,13 +33,13 @@ val DATE_CLASS    : Class<Date>    = javaClass<Date>()
  */
 public fun updateObject( o : Any, map: Map<String, Any> ): Map<String, Any>
 {
-    val unrecognizedFields: Map<String, Any> = hashMap()
+    val unrecognizedFields: MutableMap<String, Any> = hashMap()
 
    /**
     * Mapping of object fields: field name => field instance
     */
     val objectFields = o.javaClass.getFields()!!.convertToMap<Field, String, Field> {
-        field -> #( field.getName()!!, field )
+        field -> Pair( field.getName()!! , field )
     }
 
     for ( e : Map.Entry<String, Any>? in map )
@@ -77,14 +73,15 @@ public fun updateObject( o : Any, map: Map<String, Any> ): Map<String, Any>
  */
 public fun <T> updateObject( o : T, map: Map<String, Any>, ignoredFields : List<String>? = null ) : T
 {
-    val unrecognizedFieldsMap : Map<String, Any> = updateObject( o, map )
+    val unrecognizedFieldsMap : MutableMap<String, Any> = hashMap()
+    unrecognizedFieldsMap.putAll( updateObject( o, map ))
 
     if ( unrecognizedFieldsMap.isEmpty())
     {
         return o
     }
 
-    val unrecognizedFields : Set<String> = hashSet()
+    val unrecognizedFields : MutableSet<String> = hashSet()
     unrecognizedFields.addAll( unrecognizedFieldsMap.keySet())
     if (( ignoredFields != null ) && ( ignoredFields.size > 0 ))
     {
@@ -124,11 +121,11 @@ public fun convertValue( value : Any, targetType: Class<out Any?> ): Any
         }
         else if ( targetType == DATE_CLASS )
         {
-            valueConverted = if ( valueType == DATE_CLASS    ) value else Date( Long.valueOf( valueStringifed )!! )
+            valueConverted = if ( valueType == DATE_CLASS    ) value else Date( valueStringifed.toLong())
         }
-        else if ( targetType.getName() == "java.lang.Boolean" )
+        else if ( targetType == BOOLEAN_CLASS )
         {   // http://youtrack.jetbrains.com/issue/KT-2318
-            valueConverted = if ( valueType.getName() == "java.lang.Boolean" ) value else Boolean.valueOf( valueStringifed )
+            valueConverted = if ( valueType.getName() == "java.lang.Boolean" ) value else valueStringifed.toBoolean()
         }
         else
         {
@@ -153,20 +150,20 @@ public inline fun verifyNotNull( vararg objects: Any? ): Unit = for ( o in objec
 
 
 /**
- * Converts array to Map by passing each element to an operation and inserting a tuple returned (key, value) into a Map.
+ * Converts array to Map by passing each element to an operation and inserting a pair returned (key, value) into a Map.
  * Types:
  * T? - type of array elements, some elements can be null
- * K  - type of tuple's first element returned by an operation and used as map's key
- * V  - type of tuple's second element returned by an operation and used as map's value
+ * K  - type of pair first element returned by an operation and used as map's key
+ * V  - type of pair second element returned by an operation and used as map's value
  */
-public inline fun <T, K, V> Array<T?>.convertToMap( operation: ( T ) -> Tuple2<K, V> ) : Map<K, V>
+public inline fun <T, K, V> Array<T?>.convertToMap( operation: ( T ) -> Pair<K, V> ) : Map<K, V>
 {
-    val map : Map<K, V> = hashMap()
+    val map : MutableMap<K, V> = hashMap()
 
     for ( o in this.filter{ it != null })
     {
-        val tuple = operation( o!! )
-        map.put( tuple._1, tuple._2 )
+        val pair = operation( o!! )
+        map.put( pair.first , pair.second )
     }
 
     return map
@@ -174,20 +171,20 @@ public inline fun <T, K, V> Array<T?>.convertToMap( operation: ( T ) -> Tuple2<K
 
 
 /**
- * Converts collection to Map by passing each element to an operation and inserting a tuple returned (key, value) into a Map.
+ * Converts collection to Map by passing each element to an operation and inserting a pair returned (key, value) into a Map.
  * Types:
  * T? - type of collection elements, some elements can be null
- * K  - type of tuple's first element returned by an operation and used as map's key
- * V  - type of tuple's second element returned by an operation and used as map's value
+ * K  - type of pair first element returned by an operation and used as map's key
+ * V  - type of pair second element returned by an operation and used as map's value
  */
-public inline fun <T, K, V> Collection<T?>.convertToMap( operation: ( T ) -> Tuple2<K, V> ) : Map<K, V>
+public inline fun <T, K, V> Collection<T?>.convertToMap( operation: ( T ) -> Pair<K, V> ) : Map<K, V>
 {
-    val map : Map<K, V> = hashMap()
+    val map : MutableMap<K, V> = hashMap()
 
     for ( o in this.filter{ it != null })
     {
-        val tuple = operation( o!! )
-        map.put( tuple._1, tuple._2 )
+        val pair = operation( o!! )
+        map.put( pair.first , pair.second )
     }
 
     return map

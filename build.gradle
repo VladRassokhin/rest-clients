@@ -73,6 +73,7 @@ subprojects {
                     "org.slf4j:slf4j-api:$slf4jVersion",
                     "com.google.guava:guava:$guavaVersion",
                     "com.google.http-client:google-http-client:$googleHttpVersion",
+                    "com.google.http-client:google-http-client-jackson2:$googleHttpVersion",
                     "org.apache.httpcomponents:httpclient:4.2.1"
         runtime     "org.jetbrains.kotlin:kotlin-runtime:$kotlinVersion"
         testCompile "junit:junit:$junitVersion",

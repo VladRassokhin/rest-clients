@@ -1,10 +1,10 @@
 package com.github.goldin.rest.youtrack
 
 import kotlin.test.assertFalse
-import java.util.Map
+import jet.Map
 import java.net.URLEncoder
-import java.util.Collection
-import java.util.List
+import jet.Collection
+import jet.List
 
 
 /**
@@ -52,10 +52,10 @@ class UrlBuilder( url : String )
 
 
     /**
-     * Builds a URL (url?a=b&c=d) from tuples of arguments ( #(a,b), #(c,d), .. ).
+     * Builds a URL (url?a=b&c=d) from pairs of arguments ( #(a,b), #(c,d), .. ).
      */
-    fun url( url: String, arguments: Collection<Tuple2<String, String>> ): String = url + '?' + arguments.map {
-        tuple -> "${ encode( tuple._1 ) }=${ encode( tuple._2 ) }"
+    fun url( url: String, arguments: Collection<Pair<String, String>> ): String = url + '?' + arguments.map {
+        pair -> "${ encode( pair.first ) }=${ encode( pair.second ) }"
     }.
     makeString( "&" )
 }

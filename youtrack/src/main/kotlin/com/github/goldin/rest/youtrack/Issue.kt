@@ -3,8 +3,8 @@ package com.github.goldin.rest.youtrack
 import com.google.api.client.util.ArrayMap
 import com.google.api.client.util.Key
 import java.util.Date
-import java.util.List
-import java.util.Map
+import jet.List
+import jet.Map
 import kotlin.test.assertNotNull
 import com.github.goldin.rest.common.*
 import kotlin.test.assertTrue
@@ -27,7 +27,7 @@ class Issue
 
           public  var tags             : List<String>?     = null
           public  var projectShortName : String?           = null
-          public  var numberInProject  : Integer?          = null
+          public  var numberInProject  : Int?              = null
           public  var summary          : String?           = null
           public  var description      : String?           = null
           public  var created          : Date?             = null
@@ -37,9 +37,9 @@ class Issue
           public  var updaterFullName  : String?           = null
           public  var reporterName     : String?           = null
           public  var reporterFullName : String?           = null
-          public  var commentsCount    : Integer?          = null
+          public  var commentsCount    : Int?              = null
           public  var comments         : List<Comment>?    = null
-          public  var votes            : Integer?          = null
+          public  var votes            : Int?              = null
           public  var customFields     : Map<String, Any>? = null
           public  var permittedGroup   : String?           = null
 
@@ -100,7 +100,7 @@ class Issue
          * Converting array of maps (every map has two entries: field's "name" and "value") to map of fields: name => value.
          */
         val fieldsMap = field!!.convertToMap<ArrayMap<String, Any>, String, Any> {
-            map -> #( map.get( "name"  )!! as String, map.get( "value" )!! )
+            map -> Pair( map.get( "name" )!! as String , map.get( "value" )!! )
         }
 
         /**
