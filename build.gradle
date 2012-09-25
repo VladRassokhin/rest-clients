@@ -45,10 +45,10 @@ idea.module {
 subprojects {
 
     apply plugin: 'idea'
-    apply plugin: 'kotlin'        // https://github.com/evgeny-goldin/gradle-plugins
+    apply plugin: 'kotlin'
     apply plugin: 'maven'
-    apply plugin: 'about'         // http://evgeny-goldin.com/wiki/Gradle-about-plugin
-    apply plugin: 'duplicates'    // http://evgeny-goldin.com/wiki/Gradle-duplicates-plugin
+    apply plugin: 'duplicates'
+    apply plugin: 'about'
 
 
     sourceCompatibility  = 1.6
